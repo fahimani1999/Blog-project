@@ -1,0 +1,5 @@
+Django
+Psycopg
+Pillow
+django-admin startproject blogproject
+django-admin startapp blog   
