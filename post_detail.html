@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ post.title }} - My Blog
+{% endblock %}
+
+{% block content %}
+    <div class="detail-container">
+        {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="detail-image">
+        {% endif %}
+
+        <div class="detail-content">
+            <h1>{{ post.title }}</h1>
+
+            <div class="post-info">
+                <span>Author: {{ post.author.username }}</span>
+                <span>Date: {{ post.created_at|date:"F d, Y H:i" }}</span>
+            </div>
+
+            <hr>
+
+            <div class="blog-text">
+                {{ post.content|linebreaks }}
+            </div>
+
+            {% if user.is_authenticated and user == post.author %}
+                <div class="detail-buttons">
+                    <a href="{% url 'edit_post' post.id %}" class="edit-button">Edit</a>
+                    <a href="{% url 'delete_post' post.id %}" class="delete-button">Delete</a>
+                </div>
+            {% endif %}
+
+            <br>
+
+            <a href="{% url 'home' %}" class="back-button">← Back to Home</a>
+        </div>
+    </div>
+{% endblock %}

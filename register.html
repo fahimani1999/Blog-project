@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Register - My Blog
+{% endblock %}
+
+{% block content %}
+<section class="container auth-container">
+    <h1>Create Account</h1>
+
+    <form method="POST" class="auth-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p class="auth-switch">
+        Already have an account?
+        <a href="{% url 'login' %}">
+            Login
+        </a>
+    </p>
+ </section>
+{% endblock %}

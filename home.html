@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }} - My Blog{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ page_title }}</h1>
+    <div class="post-grid">
+        {% for post in posts %}
+            <article class="post-card">
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+                {% endif %}
+                <h2>{{ post.title }}</h2>
+                <p class="author">Author: {{ post.author.username }}</p>
+                <p>{{ post.content|truncatewords:35 }}</p>
+                <a href="{% url 'post_detail' post.id %}">Read More</a>
+            </article>
+        {% empty %}
+            <p>No posts yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
